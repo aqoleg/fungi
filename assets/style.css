@@ -1,0 +1,254 @@
+/* color yellowgreen */
+
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+div, button, input {
+    font-family: monospace;
+}
+h1, h2 {
+    font-weight: normal;
+    text-align: center;
+}
+a {
+    color: black;
+}
+label {
+    display: block;
+    width: 90%;
+    max-width: 400px;
+    margin: 16px auto;
+    cursor: text;
+}
+label input {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    margin-left: -10px;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 8px;
+    background: none;
+    font-size: 16px;
+    outline: none;
+}
+label input:focus {
+    border-color: yellowgreen;
+}
+button {
+    display: block;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+}
+
+#ft, #nft, #nftEdit, #create, #createImage, #market, #marketBuy {
+    display: none;
+}
+#header {
+    overflow: auto;
+    border-bottom: 4px solid black;
+}
+#header div {
+    float: left;
+}
+#headerConnect, #headerFt, #headerNft, #headerCreate, #headerMarket {
+    margin: 16px 22px;
+    border: none;
+    padding: 6px;
+}
+#headerStart {
+    width: 56px;
+    height: 56px;
+    margin: 6px;
+    border: none;
+    padding: 0px;
+    background-image: url(icon.png);
+    background-size: contain;
+}
+#connect {
+    float: right !important;
+}
+.active {
+    color: yellowgreen;
+}
+#start {
+    width: 90%;
+    max-width: 900px;
+    margin: 48px auto;
+    text-align: center;
+}
+#startMessage {
+    height: 32px;
+    color: red;
+}
+.gap {
+    margin-bottom: 64px;
+}
+.onestring {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#ft, #nftEdit, #create, #marketBuy {
+    max-width: 900px;
+    margin: auto;
+}
+.big {
+    margin: 48px 8px 5px;
+    text-align: center;
+    font-size: 200%;
+}
+.medium {
+    margin: 5px;
+    text-align: center;
+    font-size: 140%;
+}
+.small {
+    margin: 5px;
+    text-align: center;
+    font-size: 80%;
+}
+.half {
+    overflow: auto;
+}
+.half div {
+    margin: 8px 0px 32px;
+}
+.hint {
+    padding-left: 8px;
+    color: red;
+    font-size: 10px;
+}
+.button {
+    width: 180px;
+    height: 48px;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+.itemsmessage {
+    padding-top: 80px;
+}
+#nft, #market {
+    min-height: 50vh;
+}
+#nftItems, #marketItems {
+    overflow: auto;
+}
+#nftItems div, #marketItems div {
+    float: left;
+    width: 100%;
+}
+#nftItems button, #marketItems button {
+    width: 250px;
+    height: 250px;
+    margin: 32px auto 0px;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 0px;
+    font-size: 13px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+#nftItems p, #marketItems p {
+    height: 16px;
+    margin: 4px;
+    text-align: center;
+}
+#nftClose, #marketClose {
+    margin-top: 48px;
+}
+#nftItemImage, #createPreview, #marketItemImage {
+    width: 300px;
+    height: 300px;
+    margin: 18px auto 0px;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 0px;
+    font-size: 13px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.description {
+    width: 90%;
+    max-width: 400px;
+    margin: 16px auto;
+}
+#nftSet {
+    margin-bottom: 40px;
+}
+#nftSendAddress {
+    font-size: 14px;
+}
+.drag {
+    border-color: yellowgreen !important;
+    opacity: 0.5;
+}
+.market {
+    width: 95%;
+    margin: 32px auto;
+    text-align: center;
+}
+#marketItemHint {
+    height: 14px;
+    text-align: center;
+    color: red;
+    font-size: 10px;
+}
+#log {
+    width: 90%;
+    max-width: 1000px;
+    margin: 48px auto;
+}
+
+@media screen and (min-width: 800px) {
+    .half div {
+        float: left;
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 550px) {
+    #nftItems div, #marketItems div {
+        width: 50%;
+    }
+}
+@media screen and (min-width: 820px) {
+    #nftItems div, #marketItems div {
+        width: 33.3%;
+    }
+}
+@media screen and (min-width: 1100px) {
+    #nftItems div, #marketItems div {
+        width: 25%;
+    }
+}
+@media screen and (min-width: 1400px) {
+    #nftItems div, #marketItems div {
+        width: 20%;
+    }
+}
+
+@media (hover: hover) {
+    a:hover {
+        color: yellowgreen;
+    }
+    label input:hover, .button:hover {
+        border-color: yellowgreen;
+    }
+    button:hover {
+        color: yellowgreen;
+    }
+    #headerStart:hover {
+        opacity: 0.5;
+    }
+    #createPreview:hover, #nftItems button:hover, #nftItemImage:hover,
+    #marketItems button:hover, #marketItemImage:hover {
+        border-color: yellowgreen;
+        opacity: 0.5;
+    }
+}

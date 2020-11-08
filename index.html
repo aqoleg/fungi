@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>fungi</title>
+
+        <meta charset="utf-8" />
+
+        <meta name="description" content="Post an image, get a token, earn dividends!" />
+        <meta name="keywords" content="token, eth, fungi, erc1155, erc20, ethereum, dividend" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="yellowgreen" />
+
+        <link rel="icon" href="assets/icon.png" />
+        <link rel="stylesheet" href="assets/style.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="connect">
+                <button id="headerConnect" type="button">connect</button>
+            </div>
+            <div>
+                <button id="headerStart" type="button" title="start"></button>
+            </div>
+            <div>
+                <button id="headerFt" type="button">FGI</button>
+            </div>
+            <div>
+                <button id="headerNft" type="button">NFT</button>
+            </div>
+            <div>
+                <button id="headerCreate" type="button">create</button>
+            </div>
+            <div>
+                <button id="headerMarket" type="button">market</button>
+            </div>
+        </div>
+        <div id="start">
+            <p id="startMessage">loading...</p>
+            <h1 class="gap">fungi</h1>
+            <h2>buy/sell FGI tokens</h2>
+            <p class="gap">
+                FGI is an ERC20 token with a fixed price of 0.1 ETH per token.
+                It is used for creating and purchasing NFT and paying dividends.
+                Contract -
+                <a id="ftAddress" class="onestring"
+                   href="https://ropsten.etherscan.io/address/0x8adaDB0fBD9dEac3350c4265F58d858599380D7e"
+                   target="_blank" rel="noopener">0x8adaDB0fBD9dEac3350c4265F58d858599380D7e</a>,
+                contract balance -
+                <span id="ftContractEth">...</span>
+                ETH.
+            </p>
+            <h2>post your favorite art image and set its value in FGI</h2>
+            <p>
+                The image will be uploaded to IPFS and then an NFT token will be issued.
+                NFT is an ERC1155 token containing the name, description and IPFS hash of the image.
+                NFT has an initial value in FGI, that the publisher converts from FGI when creating NFT.
+                NFT cannot be changed or destroyed, it can only be transferred or purchased with FGI.
+                The owner of NFT can put it up for sale, setting the price not lower than its current value.
+                After the purchase, its value will increase to the sale price.
+            </p>
+            <p class="gap">
+                Contract -
+                <a id="nftAddress" class="onestring"
+                   href="https://ropsten.etherscan.io/address/0xA2991cc511fccf14B4542f10a250683Af04CE374"
+                   target="_blank" rel="noopener">0xA2991cc511fccf14B4542f10a250683Af04CE374</a>.
+            </p>
+            <h2>dividends</h2>
+            <p class="gap">
+                Some operations have a fee.
+                Buying and selling FGI - 10%, transferring FGI - 5%.
+                Purchasing NFT has a fee of 10% of the price difference.
+                The entire fee goes to dividends.
+                Dividends are distributed among all users according to the amount of FGI and all NFT values
+                that each user has.
+            </p>
+            <p class="gap">Contract deployed in the ropsten testnet.</p>
+            <p>
+                <a href="https://github.com/aqoleg/fungi" target="_blank" rel="noopener">
+                    github.com/aqoleg/fungi
+                </a>
+            </p>
+        </div>
+        <div id="ft">
+            <p class="big">balance</p>
+            <p class="medium"><span id="ftBalance">...</span> / <span id="ftShares">...</span> FGI</p>
+            <p class="small">(excluding/including NFT values)</p>
+            <div class="half">
+                <div>
+                    <label>
+                        enter ETH value
+                        <span id="ftBuyValueHint" class="hint"></span>
+                        <input id="ftBuyValue" type="text" />
+                    </label>
+                    <button id="ftBuy" class="button" type="button">buy</button>
+                </div>
+                <div>
+                    <label>
+                        enter FGI value
+                        <span id="ftSellValueHint" class="hint"></span>
+                        <input id="ftSellValue" type="text" />
+                    </label>
+                    <button id="ftSell" class="button" type="button">sell</button>
+                </div>
+            </div>
+            <p class="big">dividends</p>
+            <p class="medium"><span id="ftDividends">...</span> FGI</p>
+            <div class="half">
+                <div>
+                    <button id="ftReinvest" class="button" type="button">reinvest</button>
+                </div>
+                <div>
+                    <button id="ftWithdraw" class="button" type="button">withdraw</button>
+                </div>
+            </div>
+        </div>
+        <div id="nft">
+            <div id="nftItems">
+                <p class="itemsmessage">loading...</p>
+            </div>
+            <div id="nftEdit">
+                <button id="nftClose" class="button" type="button">back</button>
+                <div class="half">
+                    <div>
+                        <button id="nftItemImage" type="button"></button>
+                        <p class="medium" id="nftItemName">...</p>
+                    </div>
+                    <div>
+                        <p class="description" id="nftItemDescription">...</p>
+                        <p class="description">value <span id="nftItemPrice">...</span> FGI</p>
+                        <label>
+                            sell price in FGI
+                            <span id="nftSellPriceHint" class="hint"></span>
+                            <input id="nftSellPrice" type="text" />
+                        </label>
+                        <button id="nftSet" class="button" type="button">set price</button>
+                        <label>
+                            enter address
+                            <span id="nftSendAddressHint" class="hint"></span>
+                            <input id="nftSendAddress" type="text" size="42" maxlength="42" />
+                        </label>
+                        <button id="nftSend" class="button" type="button">send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="create">
+            <p class="big">create new NFT</p>
+            <input id="createImage" type="file" accept="image/*" />
+            <div class="half">
+                <div>
+                    <button id="createPreview" type="button"
+                            onclick="document.getElementById('createImage').click()">
+                        click or drop the file here
+                    </button>
+                </div>
+                <div>
+                    <label>
+                        enter name
+                        <input id="createName" type="text" size="40" maxlength="40" />
+                    </label>
+                    <label>
+                        enter description
+                        <input id="createDescription" type="text" size="100" maxlength="100" />
+                    </label>
+                    <label>
+                        enter value in FGI
+                        <span id="createPriceHint" class="hint"></span>
+                        <input id="createPrice" type="text" />
+                    </label>
+                    <label>
+                        enter sell price in FGI
+                        <span id="createSellPriceHint" class="hint"></span>
+                        <input id="createSellPrice" type="text" />
+                    </label>
+                    <button id="createMint" class="button" type="button">create</button>
+                </div>
+            </div>
+        </div>
+        <div id="market">
+            <div id="marketItems">
+                <p class="itemsmessage">loading...</p>
+            </div>
+            <div id="marketBuy">
+                <button id="marketClose" class="button" type="button">back</button>
+                <div class="half">
+                    <div>
+                        <button id="marketItemImage" type="button"></button>
+                        <p class="medium" id="marketItemName">...</p>
+                    </div>
+                    <div>
+                        <p class="market" id="marketItemDescription">...</p>
+                        <p class="market">value <span id="marketItemPrice">...</span> FGI</p>
+                        <p class="market">sell price <span id="marketItemSellPrice">...</span> FGI</p>
+                        <p class="market onestring">
+                            owner
+                            <span id="marketItemOwner">...</span>
+                        </p>
+                        <p id="marketItemHint"></p>
+                        <button id="marketBuyButton" class="button" type="button">buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="log"></div>
+        <script src="assets/bignumber.min.js"></script>
+        <script src="assets/script.js"></script>
+    </body>
+</html>
