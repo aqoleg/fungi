@@ -84,6 +84,9 @@ button {
     height: 32px;
     color: red;
 }
+#startMessage a {
+    color: red;
+}
 .gap {
     margin-bottom: 64px;
 }
@@ -245,6 +248,9 @@ button {
     }
     #headerStart:hover {
         opacity: 0.5;
+    }
+    #startMessage a:hover {
+        color: black;
     }
     #createPreview:hover, #nftItems button:hover, #nftItemImage:hover,
     #marketItems button:hover, #marketItemImage:hover {

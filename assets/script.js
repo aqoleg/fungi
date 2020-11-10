@@ -454,14 +454,19 @@
         script.src = 'https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js';
         script.onload = function () {
             if (typeof window.ethereum === 'undefined') {
-                document.getElementById('startMessage').innerHTML = 'install metamask';
+                document.getElementById('startMessage').innerHTML = 'install ' +
+                    '<a href="https://metamask.io/download.html" target="_blank" rel="noopener">' +
+                    'metamask</a> or use ' +
+                    '<a href="https://opera.com" target="_blank" rel="noopener">opera</a>';
             } else {
                 document.getElementById('startMessage').innerHTML = '';
                 window.web3 = new Web3(ethereum);
                 load();
-                ethereum.on('chainChanged', load);
-                ethereum.on('accountsChanged', load);
-                ethereum.autoRefreshOnNetworkChange = false;
+                if (typeof ethereum.on !== 'undefined') {
+                    ethereum.on('chainChanged', load);
+                    ethereum.on('accountsChanged', load);
+                    ethereum.autoRefreshOnNetworkChange = false;
+                }
             }
         };
         document.body.appendChild(script);
@@ -508,9 +513,7 @@
     }
 
     function load() {
-        ethereum.request({
-            method: 'net_version'
-        }).then(function (newNetwork) {
+        web3.eth.getChainId().then(function (newNetwork) {
             newNetwork = Number(newNetwork);
             if (newNetwork !== networkRopsten) {
                 network = null;
@@ -551,9 +554,7 @@
                 });
             }
 
-            ethereum.request({
-                method: 'eth_accounts'
-            }).then(function (accounts) {
+            web3.eth.getAccounts().then(function (accounts) {
                 if (accounts.length === 0) {
                     account = null;
                     document.getElementById('connect').style.display = '';
@@ -588,12 +589,15 @@
             alert('ethereum is not loaded');
             return;
         }
-        ethereum.request({
-            method: 'eth_requestAccounts'
+
+        new Promise(function (resolve) {
+            if (typeof ethereum.request === 'undefined') {
+                ethereum.enable().then(resolve);
+            } else {
+                ethereum.request({method: 'eth_requestAccounts'}).then(resolve);
+            }
         }).then(function () {
-            ethereum.request({
-                method: 'net_version'
-            }).then(function (newNetwork) {
+            web3.eth.getChainId().then(function (newNetwork) {
                 newNetwork = Number(newNetwork);
                 if (newNetwork !== networkRopsten) {
                     alert('switch to the ropsten network');
@@ -851,6 +855,8 @@
                 if (!receipt.status) {
                     message.innerHTML = ' - rejected';
                 } else {
+                    loadBalance(false);
+                    loadFt(false);
                     message.innerHTML = ' - confirmed';
                 }
             }).catch(function (error) {
@@ -898,6 +904,7 @@
             if (!receipt.status) {
                 message.innerHTML = ' - rejected';
             } else {
+                loadFt(false);
                 message.innerHTML = ' - confirmed';
             }
         }).catch(function (error) {
@@ -928,6 +935,8 @@
             if (!receipt.status) {
                 message.innerHTML = ' - rejected';
             } else {
+                loadBalance(false);
+                loadFt(false);
                 message.innerHTML = ' - confirmed';
             }
         }).catch(function (error) {
@@ -958,6 +967,7 @@
             if (!receipt.status) {
                 message.innerHTML = ' - rejected';
             } else {
+                loadFt(false);
                 message.innerHTML = ' - confirmed';
             }
         }).catch(function (error) {
@@ -1059,6 +1069,8 @@
             if (!receipt.status) {
                 message.innerHTML = ' - rejected';
             } else {
+                loadNft();
+                loadMarket();
                 message.innerHTML = ' - confirmed';
             }
         }).catch(function (error) {
@@ -1103,6 +1115,9 @@
             if (!receipt.status) {
                 message.innerHTML = ' - rejected';
             } else {
+                loadFt(false);
+                loadNft();
+                loadMarket();
                 message.innerHTML = ' - confirmed';
             }
         }).catch(function (error) {
@@ -1213,6 +1228,9 @@
                 if (!receipt.status) {
                     message.innerHTML = ' - rejected';
                 } else {
+                    loadFt(false);
+                    loadNft();
+                    loadMarket();
                     message.innerHTML = ' - confirmed';
                 }
             }).catch(function (error) {
@@ -1338,6 +1356,9 @@
             if (!receipt.status) {
                 message.innerHTML = ' - rejected';
             } else {
+                loadFt(false);
+                loadNft();
+                loadMarket();
                 message.innerHTML = ' - confirmed';
             }
         }).catch(function (error) {
